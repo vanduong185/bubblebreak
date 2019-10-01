@@ -21,5 +21,9 @@ void main() async {
   BubbleGame game = BubbleGame();
   runApp(game.widget);
 
+  TapGestureRecognizer tapper = TapGestureRecognizer();
+  tapper.onTapDown = game.onTapDown;
+  flameUtil.addGestureRecognizer(tapper);
+
   SystemChrome.setEnabledSystemUIOverlays([]);
 }
