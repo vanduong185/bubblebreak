@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flame/sprite.dart';
+
 import 'package:bubblesbreak/bubble-game.dart';
 
 class Background {
@@ -12,9 +13,9 @@ class Background {
 
     bgRect = Rect.fromLTWH(
       0,
-      game.screenSize.height - (game.tileSize * 23),
-      game.tileSize * 9,
-      game.tileSize * 23,
+      game.screenSize.height - (game.tileSize * 15),
+      game.tileSize * 7,
+      game.tileSize * 15,
     );
   }
 

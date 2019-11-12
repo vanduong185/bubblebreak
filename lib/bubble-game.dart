@@ -1,52 +1,79 @@
 import 'dart:ui';
-import 'package:bubblesbreak/components/bubbles-world.dart';
-import 'package:flame/animation.dart';
 import 'package:flame/game.dart';
 import 'package:flame/flame.dart';
-import 'dart:math';
 import 'package:flutter/gestures.dart';
-import 'package:bubblesbreak/components/background.dart';
 
-import 'package:flame/animation.dart' as animation;
-import 'package:flame/sprite.dart';
-import 'package:flame/position.dart';
+import './views/view.dart';
+import './views/home/home-view.dart';
+import './views/playing/playing-view.dart';
 
 class BubbleGame extends Game {
-  final BubblesWorld world = new BubblesWorld();
-
   Size screenSize;
   double tileSize;
-  Background background;
+
+  View activeView = View.home;
+  HomeView homeView;
+  PlayingView playingView;
 
   BubbleGame() {
     initialize();
-    world.initializeWorld();
   }
 
   void initialize() async {
     resize(await Flame.util.initialDimensions());
+
+    homeView = HomeView(this);
+    playingView = PlayingView(this);
   }
 
   @override
   void resize(Size size) {
     screenSize = size;
-    tileSize = screenSize.width / 9;
-    background = Background(this);
-    world.resize(size);
+    tileSize = screenSize.width / 7;
+    playingView?.resize(size);
   }
 
   @override
   void render(Canvas canvas) {
-    background.render(canvas);
-    world.render(canvas);
+    if (activeView == View.home) {
+      homeView.render(canvas);
+    } 
+    
+    if (activeView == View.playing) {
+      playingView.render(canvas);
+    }
   }
 
   @override
   void update(double t) {
-    world.update(t);
+    if (activeView == View.home) {
+      homeView.update(t);
+    }
+
+    if (activeView == View.playing) {
+      playingView.update(t);
+    }
   }
 
-  void onTapDown(TapDownDetails d) {
-    world.onTapDown(d);
+   void onTapDown(TapDownDetails d) {
+    if (activeView == View.home) {
+      homeView.onTapDown(d);
+    }
+  }
+
+  void onTapUp(TapUpDetails d) {
+    if (activeView == View.home) {
+      homeView.onTapUp(d);
+    }
+
+    if (activeView == View.playing) {
+      playingView.onTapUp(d);
+    }
+  }
+
+  void onTapCancel() {
+    if (activeView == View.home) {
+      homeView.onTapCancel();
+    }
   }
 }
