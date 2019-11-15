@@ -9,4 +9,10 @@ class Configs {
     "is_test": "0",
     "is_desktop": "1"
   };
+
+  static String getWordTypeJp(String type) {
+    if (type == "noun") return "名詞";
+    if (type == "verb") return "動詞";
+    if (type == "adjective") return "形容詞";
+  }
 }

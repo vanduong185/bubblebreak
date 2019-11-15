@@ -90,7 +90,7 @@ class BubblesWorld extends Box2DComponent {
     super.render(canvas);
   }
 
-  Future<bool> onTapUp(TapUpDetails d) async {
+  Future<dynamic> onTapUp(TapUpDetails d) async {
     if (!isHandleTap) {
       for (int i = 0; i < bubbles.length; ++i) {
         if (bubbles[i].bubbleRect != null) {
@@ -112,8 +112,10 @@ class BubblesWorld extends Box2DComponent {
       }
 
       if (tappedBubble != null && tappedBubbleIndex != null) {
-        
-        return tappedBubble.word.word_type == stage.stage_word_type;
+        return  { 
+          "isCorrect": tappedBubble.word.word_type == stage.stage_word_type,
+          "word": tappedBubble.word
+        };
       }
     }
 

@@ -68,7 +68,7 @@ class PlayingView {
     progress = Progress(this.game);
     progress.setIndex(currentStage);
 
-    learningDialog = LearningDialog(game, new Word());
+    learningDialog = LearningDialog(game);
 
     isLoading = false;
     world.generateBubbles();
@@ -96,7 +96,6 @@ class PlayingView {
     }
 
     if (isWrong) {
-      
       learningDialog.render(canvas);
     }
   }
@@ -120,7 +119,7 @@ class PlayingView {
     }
 
     if (isWrong) {
-      // learningDialog.update(t);
+      learningDialog.update(t);
     }
   }
 
@@ -153,8 +152,9 @@ class PlayingView {
     if (world.bubbles != null && !isWrong) {
       world.onTapUp(d).then((result) {
         if (result != null) {
-          isCorrect = result;
-          isWrong = !result;
+          isCorrect = result["isCorrect"];
+          isWrong = !result["isCorrect"];
+          learningDialog.setWord(result["word"]);
         }
       });
     }
