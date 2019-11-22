@@ -3,8 +3,6 @@ import 'package:bubblesbreak/configs/configs.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/animation.dart';
 import 'package:flame/components/text_box_component.dart';
-import 'package:flame/components/text_component.dart';
-import 'package:flame/palette.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/position.dart' as flamePosition;
 import 'package:flame/text_config.dart';
@@ -30,33 +28,25 @@ class LearningDialog {
   TextConfig wordType;
   TextConfig sentence;
 
-  MyTextBox box;
-  TextComponent text;
+  TextBoxComponent sentenceBox;
 
   LearningDialog(this.game) {
     dialogSprite = Sprite('playing/learningBG.png');
 
     nextButtonAni = Animation.sequenced("playing/nextButton.png", 3,
         textureHeight: 104, textureWidth: 500, stepTime: 0.1);
-
-    sentence = TextConfig(
-        fontSize: 16, textAlign: TextAlign.justify, color: Color(0xFFFF0000));
-        
-    box = MyTextBox(content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum.",
-        textConfig: sentence, maxWidth: game.tileSize * 4)
-      ..anchor = Anchor.center
-      ..y = game.screenSize.height / 2
-      ..x = game.screenSize.width / 2;
-    
-   text = TextComponent('Hello, Flame', config: sentence)
-      ..anchor = Anchor.topCenter
-      ..x = game.screenSize.width / 2
-      ..y = 32.0;
   }
 
   setWord(Word w) {
     this.word = w;
+
+    sentence = TextConfig(
+        fontSize: 16, fontFamily: 'Fredoka', textAlign: TextAlign.justify, color: Color(0xFF000000));
+
+    sentenceBox = TextBoxComponent(w.eng_sentence + "  ", config: sentence, boxConfig: TextBoxConfig(timePerChar: 0, margin: 0, maxWidth: game.tileSize * 4));
+    sentenceBox.anchor = Anchor.topCenter;
+    sentenceBox.x = game.screenSize.width / 2;
+    sentenceBox.y = game.screenSize.height / 2 - game.tileSize * 0.2;
   }
 
   void render(Canvas canvas) {
@@ -70,7 +60,7 @@ class LearningDialog {
     dialogRect = Rect.fromCenter(
         center:
             new Offset(game.screenSize.width / 2, game.screenSize.height / 2),
-        width: game.tileSize * 6,
+        width: game.tileSize * 5,
         height: game.tileSize * 8);
 
     dialogSprite.renderRect(canvas, dialogRect);
@@ -126,51 +116,12 @@ class LearningDialog {
             game.screenSize.height / 2 - game.tileSize * 1.1)),
         anchor: Anchor.center);
 
-    
-
-    // sentence.render(
-    //     canvas,
-    //     word.eng_sentence,
-    //     flamePosition.Position.fromOffset(
-    //         new Offset(game.screenSize.width / 2, game.screenSize.height / 2)),
-    //     anchor: Anchor.center);
-    // box = null;
-
-    // box = new MyTextBox(text:
-    //     "a",
-    //     textConfig: sentence, maxWidth: game.tileSize * 4)
-    //   ..anchor = Anchor.center
-    //   ..y = game.screenSize.height / 2
-    //   ..x = game.screenSize.width / 2;
-    
-    //
-    text.render(canvas);
-    box.render(canvas);
+    sentenceBox.render(canvas);
   }
 
   void update(double t) {
     //nextButtonAni.update(t);
 
-    box.update(t);
-
-    text.update(t);
+    sentenceBox.update(t);
   }
-}
-
-class MyTextBox extends TextBoxComponent {
-  MyTextBox({String content, TextConfig textConfig, double maxWidth})
-      : super(content,
-            config: textConfig,
-            boxConfig: TextBoxConfig(timePerChar: 0, maxWidth: maxWidth));
-  // @override
-  // void drawBackground(Canvas c) {
-  //   // final Rect rect = Rect.fromLTWH(0, 0, width, height);
-  //   // c.drawRect(rect, Paint()..color = const Color(0xFFFF00FF));
-  //   // c.drawRect(
-  //   //     rect.deflate(boxConfig.margin),
-  //   //     Paint()
-  //   //       ..color = BasicPalette.black.color
-  //   //       ..style = PaintingStyle.stroke);
-  // }
-
 }

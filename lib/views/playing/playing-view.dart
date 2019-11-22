@@ -6,14 +6,17 @@ import 'package:bubblesbreak/views/playing/helpers/modeTitle.dart';
 import 'package:bubblesbreak/views/playing/helpers/progess.dart';
 import 'package:bubblesbreak/views/playing/helpers/stage-word-type-ani.dart';
 import 'package:bubblesbreak/views/playing/helpers/stage-word-type.dart';
+import 'package:bubblesbreak/views/view.dart';
 import 'package:flutter/gestures.dart';
 
 import 'package:bubblesbreak/configs/configs.dart';
 import 'package:bubblesbreak/models/stage.dart';
 import 'package:bubblesbreak/utils/network.dart';
 import 'package:bubblesbreak/bubble-game.dart';
+
 import './helpers/background.dart';
 import './helpers/bubbles-world.dart';
+import 'helpers/result-dialog.dart';
 
 class PlayingView {
   final BubbleGame game;
@@ -33,6 +36,8 @@ class PlayingView {
 
   LearningDialog learningDialog;
 
+  ResultDialog resultDialog;
+
   List<Stage> listStage;
   int currentStage;
 
@@ -41,18 +46,21 @@ class PlayingView {
 
   bool isLoading;
 
+  bool endGame;
+
   PlayingView(this.game) {
     playingBackground = Background(this.game);
 
     world = new BubblesWorld(game: this.game);
     world.initializeWorld();
-
-    isCorrect = false;
-    isWrong = false;
   }
 
   initialize() async {
     isLoading = true;
+    isCorrect = false;
+    isWrong = false;
+    endGame = false;
+
     listStage = await Network.getGameData();
     currentStage = 0;
     world.stage = listStage[currentStage];
@@ -69,6 +77,7 @@ class PlayingView {
     progress.setIndex(currentStage);
 
     learningDialog = LearningDialog(game);
+    resultDialog = ResultDialog(game);
 
     isLoading = false;
     world.generateBubbles();
@@ -79,7 +88,7 @@ class PlayingView {
   void render(Canvas canvas) {
     playingBackground.render(canvas);
 
-    if (!isLoading) {
+    if (!isLoading && !endGame) {
       modeTitle.render(canvas);
 
       progress.render(canvas);
@@ -97,6 +106,10 @@ class PlayingView {
 
     if (isWrong) {
       learningDialog.render(canvas);
+    }
+
+    if (endGame) {
+      resultDialog.render(canvas);
     }
   }
 
@@ -142,6 +155,9 @@ class PlayingView {
 
       world.generateBubbles();
     }
+    else {
+      endGame = true;
+    }
   }
 
   void resize(Size size) {
@@ -157,6 +173,12 @@ class PlayingView {
           learningDialog.setWord(result["word"]);
         }
       });
+    }
+
+    if (endGame) {
+      if (resultDialog.replayBtnRect.contains(d.globalPosition)) {
+        game.activeView = View.home;
+      }
     }
 
     if (isWrong) {

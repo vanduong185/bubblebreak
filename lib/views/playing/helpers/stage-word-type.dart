@@ -25,16 +25,18 @@ class StageWordType {
   }
 
   void render(Canvas canvas) {
+    rect = Rect.fromCenter(
+        center: new Offset(game.screenSize.width / 2,
+            game.screenSize.height - game.tileSize * 2/3),
+        width: game.tileSize * 2,
+        height: game.tileSize);
+
     sprite.renderRect(canvas, rect);
   }
 
   void update(double t) {}
 
   void resize() {
-    rect = Rect.fromCenter(
-        center: new Offset(game.screenSize.width / 2,
-            game.screenSize.height - game.tileSize * 1.1),
-        width: game.tileSize * 2.5,
-        height: game.tileSize * 1.8);
+    
   }
 }

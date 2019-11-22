@@ -29,7 +29,7 @@ class BubbleGame extends Game {
   @override
   void resize(Size size) {
     screenSize = size;
-    tileSize = screenSize.width / 7;
+    tileSize = screenSize.width / 6;
     playingView?.resize(size);
   }
 

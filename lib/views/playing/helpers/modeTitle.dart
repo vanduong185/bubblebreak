@@ -20,15 +20,17 @@ class ModeTitle {
   }
 
   void render(Canvas canvas) {
+    rect = Rect.fromCenter(
+      center: new Offset(game.screenSize.width / 2, game.tileSize / 2),
+      width: game.tileSize * 4,
+      height: game.tileSize / 2);
+
     sprite.renderRect(canvas, rect);
   }
 
   void update(double t) {}
 
   void resize() {
-    rect = Rect.fromCenter(
-      center: new Offset(game.screenSize.width / 2, game.tileSize),
-      width: game.tileSize * 4,
-      height: game.tileSize*0.5);
+    
   }
 }

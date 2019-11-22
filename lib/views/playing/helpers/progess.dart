@@ -24,7 +24,7 @@ class Progress {
   void render(Canvas canvas) {
     double fontSize;
     if (this.game.screenSize.shortestSide < 600 )
-      fontSize = 50;
+      fontSize = 30;
     else fontSize = 60;
 
     textConfig = TextConfig(
@@ -33,7 +33,7 @@ class Progress {
     String text = (index + 1).toString() + "/" + Configs.NUMBER_OF_STAGE.toString();
 
     textConfig.render(
-        canvas, text, flamePosition.Position.fromOffset(new Offset(game.screenSize.width/2, game.tileSize*2)), anchor: Anchor.center);
+        canvas, text, flamePosition.Position.fromOffset(new Offset(game.screenSize.width/2, game.tileSize * 1.2)), anchor: Anchor.center);
   }
 
   void update(double t) {}

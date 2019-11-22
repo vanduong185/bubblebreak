@@ -13,9 +13,9 @@ class Background {
 
     bgRect = Rect.fromLTWH(
       0,
-      game.screenSize.height - (game.tileSize * 15),
-      game.tileSize * 7,
-      game.tileSize * 15,
+      0,
+      game.screenSize.width,
+      game.screenSize.height,
     );
   }
 

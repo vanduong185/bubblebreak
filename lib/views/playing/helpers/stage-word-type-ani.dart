@@ -35,7 +35,7 @@ class StageWordTypeAni {
 
   void update(double t) {
     if (!isAtEndPoint) {
-      rect = rect.translate(0, -50*t);
+      rect = rect.translate(0, -100*t);
 
       if (rect.top < endPoint) {
         isAtEndPoint = true;
