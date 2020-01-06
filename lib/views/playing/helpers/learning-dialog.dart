@@ -9,6 +9,7 @@ import 'package:flame/text_config.dart';
 
 import 'package:bubblesbreak/bubble-game.dart';
 import 'package:bubblesbreak/models/word.dart';
+import 'package:flutter/painting.dart';
 
 class LearningDialog {
   final BubbleGame game;
@@ -28,6 +29,8 @@ class LearningDialog {
   TextConfig wordType;
   TextConfig sentence;
 
+  TextPainter painter;
+
   TextBoxComponent sentenceBox;
 
   LearningDialog(this.game) {
@@ -40,13 +43,28 @@ class LearningDialog {
   setWord(Word w) {
     this.word = w;
 
-    sentence = TextConfig(
-        fontSize: 16, fontFamily: 'Fredoka', textAlign: TextAlign.justify, color: Color(0xFF000000));
+    // sentence = TextConfig(
+    //     fontSize: 16, fontFamily: 'Arial', textAlign: TextAlign.justify, color: Color(0xFF000000));
 
-    sentenceBox = TextBoxComponent(w.eng_sentence + "  ", config: sentence, boxConfig: TextBoxConfig(timePerChar: 0, margin: 0, maxWidth: game.tileSize * 4));
-    sentenceBox.anchor = Anchor.topCenter;
-    sentenceBox.x = game.screenSize.width / 2;
-    sentenceBox.y = game.screenSize.height / 2 - game.tileSize * 0.2;
+    // sentenceBox = TextBoxComponent(w.eng_sentence + "  ", config: sentence, boxConfig: TextBoxConfig(timePerChar: 0, margin: 0, maxWidth: game.tileSize * 4));
+    // sentenceBox.anchor = Anchor.topCenter;
+    // sentenceBox.x = game.screenSize.width / 2;
+    // sentenceBox.y = game.screenSize.height / 2 - game.tileSize * 0.2;
+
+    painter = TextPainter(
+      textAlign: TextAlign.center,
+      textDirection: TextDirection.ltr,
+    );
+
+    painter.text = TextSpan(
+      text: w.eng_sentence,
+      style: TextStyle(
+        color: Color(0xFFF47B2A),
+      ),
+    );
+
+    if (painter.text == null) return;
+    painter.layout(maxWidth: game.tileSize * 4);
   }
 
   void render(Canvas canvas) {
@@ -116,12 +134,13 @@ class LearningDialog {
             game.screenSize.height / 2 - game.tileSize * 1.1)),
         anchor: Anchor.center);
 
-    sentenceBox.render(canvas);
+    // sentenceBox.render(canvas);
+    painter.paint(canvas, Offset(game.screenSize.width / 2 - painter.width/2 , game.screenSize.height / 2 - game.tileSize * 0.2));
   }
 
   void update(double t) {
     //nextButtonAni.update(t);
 
-    sentenceBox.update(t);
+    // sentenceBox.update(t);
   }
 }

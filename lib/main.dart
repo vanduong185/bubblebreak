@@ -9,6 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:bubblesbreak/bubble-game.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Flame.audio.disableLog();
   Flame.images.loadAll(<String>[
     'playing/background.png',
@@ -18,7 +20,10 @@ void main() async {
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.portraitUp);
 
-  BubbleGame game = BubbleGame();
+  
+  final Size size = await Flame.util.initialDimensions();
+  BubbleGame game = BubbleGame(size);
+  //runApp(BubbleGame(size).widget);
   runApp(game.widget);
 
   TapGestureRecognizer tapper = TapGestureRecognizer();

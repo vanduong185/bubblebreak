@@ -15,12 +15,14 @@ class BubbleGame extends Game {
   HomeView homeView;
   PlayingView playingView;
 
-  BubbleGame() {
+  BubbleGame(Size screenSize) {
+    this.screenSize = screenSize;
+    
     initialize();
   }
 
   void initialize() async {
-    resize(await Flame.util.initialDimensions());
+    resize(screenSize);
 
     homeView = HomeView(this);
     playingView = PlayingView(this);
