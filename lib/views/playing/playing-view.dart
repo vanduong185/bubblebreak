@@ -3,6 +3,7 @@ import 'package:bubblesbreak/models/word.dart';
 import 'package:bubblesbreak/views/playing/helpers/goodjob-ani.dart';
 import 'package:bubblesbreak/views/playing/helpers/learning-dialog.dart';
 import 'package:bubblesbreak/views/playing/helpers/modeTitle.dart';
+import 'package:bubblesbreak/views/playing/helpers/preloader.dart';
 import 'package:bubblesbreak/views/playing/helpers/progess.dart';
 import 'package:bubblesbreak/views/playing/helpers/stage-word-type-ani.dart';
 import 'package:bubblesbreak/views/playing/helpers/stage-word-type.dart';
@@ -38,6 +39,8 @@ class PlayingView {
 
   ResultDialog resultDialog;
 
+  Preloader preloader;
+
   List<Stage> listStage;
   int currentStage;
 
@@ -61,6 +64,8 @@ class PlayingView {
     isWrong = false;
     endGame = false;
 
+    preloader = Preloader(this.game);
+
     listStage = await Network.getGameData();
     currentStage = 0;
     world.stage = listStage[currentStage];
@@ -78,15 +83,20 @@ class PlayingView {
 
     learningDialog = LearningDialog(game);
     resultDialog = ResultDialog(game);
-
-    isLoading = false;
+    
     world.generateBubbles();
 
     goodJobAnimation = new GoodJobAni(this.game);
+
+    isLoading = false;
   }
 
   void render(Canvas canvas) {
     playingBackground.render(canvas);
+
+    if (isLoading) {
+      preloader.render(canvas);
+    }
 
     if (!isLoading && !endGame) {
       modeTitle.render(canvas);
@@ -115,6 +125,10 @@ class PlayingView {
 
   void update(double t) {
     world.update(t);
+
+    if (isLoading) {
+      preloader.update(t);
+    }
     
     if (stageWordTypeAni != null)
       if (stageWordTypeAni.isAtEndPoint == false) stageWordTypeAni.update(t);

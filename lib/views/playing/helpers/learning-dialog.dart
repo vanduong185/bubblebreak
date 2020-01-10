@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:bubblesbreak/configs/configs.dart';
+import 'package:bubblesbreak/configs/theme.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/animation.dart';
 import 'package:flame/components/text_box_component.dart';
@@ -43,14 +44,6 @@ class LearningDialog {
   setWord(Word w) {
     this.word = w;
 
-    // sentence = TextConfig(
-    //     fontSize: 16, fontFamily: 'Arial', textAlign: TextAlign.justify, color: Color(0xFF000000));
-
-    // sentenceBox = TextBoxComponent(w.eng_sentence + "  ", config: sentence, boxConfig: TextBoxConfig(timePerChar: 0, margin: 0, maxWidth: game.tileSize * 4));
-    // sentenceBox.anchor = Anchor.topCenter;
-    // sentenceBox.x = game.screenSize.width / 2;
-    // sentenceBox.y = game.screenSize.height / 2 - game.tileSize * 0.2;
-
     painter = TextPainter(
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
@@ -59,7 +52,7 @@ class LearningDialog {
     painter.text = TextSpan(
       text: w.eng_sentence,
       style: TextStyle(
-        color: Color(0xFFF47B2A),
+        color: ColorPallet.grey,
       ),
     );
 
@@ -109,7 +102,7 @@ class LearningDialog {
     japMeaning = TextConfig(
         fontSize: 20,
         fontFamily: 'Fredoka',
-        color: Color(0xFFF47B2A),
+        color: ColorPallet.orange,
         textAlign: TextAlign.justify);
 
     japMeaning.render(
@@ -123,7 +116,7 @@ class LearningDialog {
     wordType = TextConfig(
         fontSize: 20,
         fontFamily: 'Fredoka',
-        color: Color(0xFFF47B2A),
+        color: ColorPallet.orange,
         textAlign: TextAlign.justify);
 
     wordType.render(
@@ -135,7 +128,13 @@ class LearningDialog {
         anchor: Anchor.center);
 
     // sentenceBox.render(canvas);
-    painter.paint(canvas, Offset(game.screenSize.width / 2 - painter.width/2 , game.screenSize.height / 2 - game.tileSize * 0.2));
+    painter.paint(
+      canvas,
+      Offset(
+        game.screenSize.width / 2 - painter.width / 2,
+        game.screenSize.height / 2 - game.tileSize * 0.2,
+      ),
+    );
   }
 
   void update(double t) {

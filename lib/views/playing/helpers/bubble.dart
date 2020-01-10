@@ -1,18 +1,13 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:box2d_flame/box2d.dart';
 import 'package:bubblesbreak/configs/theme.dart';
-import 'package:flame/anchor.dart';
 import 'package:flame/animation.dart';
 import 'package:flame/box2d/box2d_component.dart';
-import 'package:flame/position.dart' as flamePosition;
-import 'package:flame/text_config.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/painting.dart';
 
 import 'package:bubblesbreak/models/word.dart';
 import 'package:bubblesbreak/utils/utils.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Bubble extends BodyComponent {
   ImagesLoader images = new ImagesLoader();
@@ -40,6 +35,18 @@ class Bubble extends BodyComponent {
       textDirection: TextDirection.ltr,
     );
 
+    painter.text = TextSpan(
+      text: word.eng_word,
+      style: TextStyle(
+        color: ColorPallet.white,
+        fontSize: fontsize,
+        fontFamily: "Fredoka",
+        shadows: Theme.textBubbleShadow,
+      ),
+    );
+
+    if (painter.text != null) painter.layout();
+
     _createBody();
   }
 
@@ -60,55 +67,7 @@ class Bubble extends BodyComponent {
     }
 
     var image = images.get("bubble");
-
-    // TextConfig textConfig = TextConfig(
-    //     fontSize: fontsize, fontFamily: 'Fredoka', color: Color(0xFFF47B2A), textAlign: TextAlign.justify);
-    // textConfig.render(
-    //     canvas, word.eng_word, flamePosition.Position.fromOffset(center.translate(radius * 0.1, radius * 0.1)), anchor: Anchor.center);
-    painter.text = TextSpan(
-      text: word.eng_word,
-      style: TextStyle(
-        color: ColorPallet.orange,
-        fontSize: fontsize,
-        fontFamily: 'Fredoka',
-        shadows: <Shadow>[
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(0, 1.5),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(1.5, 0),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(0, -1.5),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(-1.5, 0),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(1.5, -1.5),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(-1.5, -1.5),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(-1.5, 1.5),
-          ),
-          Shadow(
-            color: ColorPallet.white,
-            offset: Offset(1.5, 1.5),
-          ),
-        ],
-      ),
-    );
     
-    painter.layout();
     painter.paint(canvas,
         center.translate(-painter.size.width / 2, -painter.size.height / 2));
 
