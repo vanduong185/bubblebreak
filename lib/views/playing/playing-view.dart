@@ -83,7 +83,8 @@ class PlayingView {
 
     learningDialog = LearningDialog(game);
     resultDialog = ResultDialog(game);
-    
+    resultDialog.reset();
+
     world.generateBubbles();
 
     goodJobAnimation = new GoodJobAni(this.game);
@@ -129,10 +130,11 @@ class PlayingView {
     if (isLoading) {
       preloader.update(t);
     }
-    
-    if (stageWordTypeAni != null)
-      if (stageWordTypeAni.isAtEndPoint == false) stageWordTypeAni.update(t);
-      else stageWordTypeAni = null;
+
+    if (stageWordTypeAni != null) if (stageWordTypeAni.isAtEndPoint == false)
+      stageWordTypeAni.update(t);
+    else
+      stageWordTypeAni = null;
 
     if (isCorrect) {
       goodJobAnimation.update(t);
@@ -147,6 +149,10 @@ class PlayingView {
 
     if (isWrong) {
       learningDialog.update(t);
+    }
+
+    if (endGame) {
+      resultDialog.update(t);
     }
   }
 
@@ -168,8 +174,7 @@ class PlayingView {
       progress.setIndex(currentStage);
 
       world.generateBubbles();
-    }
-    else {
+    } else {
       endGame = true;
     }
   }

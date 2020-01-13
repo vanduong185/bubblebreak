@@ -11,6 +11,7 @@ class Preloader {
 
   Animation animation;
   TextConfig textConfig;
+  Rect overlayRect;
 
   Preloader(this.game) {
     animation = Animation.sequenced("playing/preloader2.png", 5,
@@ -24,6 +25,13 @@ class Preloader {
   }
 
   void render(Canvas canvas) {
+    // overlayRect =
+    //     Rect.fromLTWH(0, 0, game.screenSize.width, game.screenSize.height);
+    // Paint overlayPaint = Paint();
+    // overlayPaint.color = Color(0xFF545454).withOpacity(0.5);
+
+    // canvas.drawRect(overlayRect, overlayPaint);
+
     animation.getSprite().renderRect(
       canvas,
       new Rect.fromCenter(
