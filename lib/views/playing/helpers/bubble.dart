@@ -36,7 +36,7 @@ class Bubble extends BodyComponent {
     );
 
     painter.text = TextSpan(
-      text: word.eng_word,
+      text: word.engWord,
       style: TextStyle(
         color: ColorPallet.white,
         fontSize: fontsize,
@@ -48,11 +48,6 @@ class Bubble extends BodyComponent {
     if (painter.text != null) painter.layout();
 
     _createBody();
-  }
-
-  @override
-  void initializeWorld() {
-    // TODO: implement initializeWorld
   }
 
   @override
@@ -89,7 +84,7 @@ class Bubble extends BodyComponent {
   void _createBody() {
     final shape = new CircleShape();
     // shape.radius = ((fontsize / 2) * word.eng_word.length.toDouble()) / 4.5;
-    shape.radius = word.eng_word.length.toDouble() * (fontsize / 12) + 5;
+    shape.radius = word.engWord.length.toDouble() * (fontsize / 12) + 5;
     shape.p.x = x;
     shape.p.y = y;
 

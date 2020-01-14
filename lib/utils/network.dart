@@ -19,19 +19,19 @@ class Network {
 
       for (var s in stages) {
         Stage stage = new Stage(
-          stage_word_type: s["stage_word_type"],
-          word_list: new List<Word>()
+          stageWordType: s["stage_word_type"],
+          wordList: new List<Word>()
         );
 
         for (var w in s["word_list"]) {
           Word word = new Word.fromMap(w);
-          stage.word_list.add(word);
+          stage.wordList.add(word);
         }
 
         listStage.add(stage);
       }
-
-      return listStage; 
     }
+
+    return listStage; 
   }
 }

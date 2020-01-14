@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flame/box2d/box2d_component.dart';
@@ -47,7 +46,7 @@ class BubblesWorld extends Box2DComponent {
   generateBubbles() {
     bubbles = [];
 
-    words = stage.word_list;
+    words = stage.wordList;
     double fontSize;
 
     if (game.screenSize.shortestSide < 600 )
@@ -113,7 +112,7 @@ class BubblesWorld extends Box2DComponent {
 
       if (tappedBubble != null && tappedBubbleIndex != null) {
         return  { 
-          "isCorrect": tappedBubble.word.word_type == stage.stage_word_type,
+          "isCorrect": tappedBubble.word.wordType == stage.stageWordType,
           "word": tappedBubble.word
         };
       }

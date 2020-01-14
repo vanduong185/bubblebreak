@@ -13,9 +13,7 @@ class Progress {
 
   int index;
 
-  Progress(this.game) {
-
-  }
+  Progress(this.game);
 
   void setIndex(int index) {
     this.index = index;

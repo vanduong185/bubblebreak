@@ -1,29 +1,29 @@
 import 'dart:convert';
 import 'package:bubblesbreak/models/word.dart';
 
-Stage StageFromJson(String str) {
+Stage stageFromJson(String str) {
   final jsonData = json.decode(str);
   return Stage.fromMap(jsonData);
 }
 
-String StageToJson(Stage data) {
+String stageToJson(Stage data) {
   final dyn = data.toMap();
   return json.encode(dyn);
 }
 
 class Stage {
-  String stage_word_type;
-  List<Word> word_list;
+  String stageWordType;
+  List<Word> wordList;
 
-  Stage({this.stage_word_type, this.word_list});
+  Stage({this.stageWordType, this.wordList});
 
   factory Stage.fromMap(Map<String, dynamic> json) => new Stage(
-    stage_word_type: json["stage_word_type"],
-    word_list: json["word_list"],
+    stageWordType: json["stage_word_type"],
+    wordList: json["word_list"],
   );
 
   Map<String, dynamic> toMap() => {
-    "stage_word_type": stage_word_type,
-    "word_list": word_list,
+    "stageWordType": stageWordType,
+    "wordList": wordList,
   };
 }

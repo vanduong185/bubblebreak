@@ -3,7 +3,6 @@ import 'package:bubblesbreak/configs/configs.dart';
 import 'package:bubblesbreak/configs/theme.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/animation.dart';
-import 'package:flame/components/text_box_component.dart';
 import 'package:flame/palette.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/position.dart' as flamePosition;
@@ -70,7 +69,7 @@ class LearningDialog {
     );
 
     sentence.text = TextSpan(
-      text: w.eng_sentence,
+      text: w.engSentence,
       style: TextStyle(
         color: ColorPallet.grey,
       ),
@@ -117,7 +116,7 @@ class LearningDialog {
 
       engWord.render(
           canvas,
-          word.eng_word,
+          word.engWord,
           flamePosition.Position.fromOffset(new Offset(
               game.screenSize.width / 2,
               game.screenSize.height / 2 - game.tileSize * 2.5)),
@@ -131,7 +130,7 @@ class LearningDialog {
 
       japMeaning.render(
           canvas,
-          word.japan_word,
+          word.japanWord,
           flamePosition.Position.fromOffset(new Offset(
               game.screenSize.width / 2 + game.tileSize,
               game.screenSize.height / 2 - game.tileSize * 1.8)),
@@ -145,7 +144,7 @@ class LearningDialog {
 
       wordType.render(
           canvas,
-          Configs.getWordTypeJp(word.word_type),
+          Configs.getWordTypeJp(word.wordType),
           flamePosition.Position.fromOffset(new Offset(
               game.screenSize.width / 2 + game.tileSize,
               game.screenSize.height / 2 - game.tileSize * 1.1)),

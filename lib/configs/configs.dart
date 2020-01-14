@@ -14,5 +14,7 @@ class Configs {
     if (type == "noun") return "名詞";
     if (type == "verb") return "動詞";
     if (type == "adjective") return "形容詞";
+
+    return "Unknown";
   }
 }

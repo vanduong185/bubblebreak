@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:bubblesbreak/models/word.dart';
+import 'package:bubblesbreak/views/playing/helpers/clock.dart';
 import 'package:bubblesbreak/views/playing/helpers/goodjob-ani.dart';
 import 'package:bubblesbreak/views/playing/helpers/learning-dialog.dart';
 import 'package:bubblesbreak/views/playing/helpers/modeTitle.dart';
@@ -30,6 +30,8 @@ class PlayingView {
   ModeTitle modeTitle;
 
   Progress progress;
+
+  Clock clock;
 
   BubblesWorld world;
 
@@ -71,15 +73,17 @@ class PlayingView {
     world.stage = listStage[currentStage];
 
     stageWordType = StageWordType(this.game);
-    stageWordType.setType(listStage[currentStage].stage_word_type);
+    stageWordType.setType(listStage[currentStage].stageWordType);
 
     stageWordTypeAni = StageWordTypeAni(this.game);
-    stageWordTypeAni.setType(listStage[currentStage].stage_word_type);
+    stageWordTypeAni.setType(listStage[currentStage].stageWordType);
 
     modeTitle = ModeTitle(this.game);
 
     progress = Progress(this.game);
     progress.setIndex(currentStage);
+
+    clock = Clock(this.game);
 
     learningDialog = LearningDialog(game);
     resultDialog = ResultDialog(game);
@@ -88,6 +92,8 @@ class PlayingView {
     world.generateBubbles();
 
     goodJobAnimation = new GoodJobAni(this.game);
+    
+    clock.start();
 
     isLoading = false;
   }
@@ -103,6 +109,8 @@ class PlayingView {
       modeTitle.render(canvas);
 
       progress.render(canvas);
+
+      clock.render(canvas);
 
       stageWordType.render(canvas);
 
@@ -166,14 +174,16 @@ class PlayingView {
     if (currentStage < Configs.NUMBER_OF_STAGE) {
       world.stage = listStage[currentStage];
 
-      stageWordType.setType(listStage[currentStage].stage_word_type);
+      stageWordType.setType(listStage[currentStage].stageWordType);
 
       stageWordTypeAni = new StageWordTypeAni(game);
-      stageWordTypeAni.setType(listStage[currentStage].stage_word_type);
+      stageWordTypeAni.setType(listStage[currentStage].stageWordType);
 
       progress.setIndex(currentStage);
 
       world.generateBubbles();
+
+      clock.reset();
     } else {
       endGame = true;
     }

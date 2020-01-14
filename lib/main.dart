@@ -1,7 +1,4 @@
-import 'dart:ui' as ui;
-
 import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
 import 'package:flame/util.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +20,6 @@ void main() async {
   
   final Size size = await Flame.util.initialDimensions();
   BubbleGame game = BubbleGame(size);
-  //runApp(BubbleGame(size).widget);
   runApp(game.widget);
 
   TapGestureRecognizer tapper = TapGestureRecognizer();

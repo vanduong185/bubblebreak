@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/gestures.dart';
 
 import './views/view.dart';
