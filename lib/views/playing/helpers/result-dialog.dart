@@ -25,8 +25,8 @@ class ResultDialog {
     replayButtonAni = Animation.sequenced("playing/resultButton.png", 3,
         textureHeight: 104, textureWidth: 504, stepTime: 0.1);
 
-    dialogRectMaxWidth = game.tileSize * 5;
-    dialogRectMaxHeight = game.tileSize * 8;
+    dialogRectMaxWidth = game.tileSize * 4;
+    dialogRectMaxHeight = game.tileSize * 6;
   }
 
   reset() {
@@ -54,9 +54,9 @@ class ResultDialog {
         dialogRectHeight == dialogRectMaxHeight) {
       replayBtnRect = Rect.fromCenter(
           center: new Offset(game.screenSize.width / 2,
-              game.screenSize.height / 2 + game.tileSize * 3),
-          width: game.tileSize * 4,
-          height: game.tileSize);
+              game.screenSize.height / 2 + game.tileSize * 2),
+          width: game.tileSize * 3,
+          height: game.tileSize * 0.8);
 
       replayButtonAni
           .getSprite()
@@ -72,7 +72,7 @@ class ResultDialog {
       dialogRectWidth += dialogRectWidth * t * 20;
       dialogRectHeight += dialogRectHeight * t * 20;
 
-      if (dialogRectWidth > dialogRectMaxWidth &&
+      if (dialogRectWidth > dialogRectMaxWidth ||
           dialogRectHeight > dialogRectMaxHeight) {
         dialogRectWidth = dialogRectMaxWidth;
         dialogRectHeight = dialogRectMaxHeight;

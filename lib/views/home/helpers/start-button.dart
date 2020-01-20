@@ -32,18 +32,11 @@ class StartButton {
   }
 
   void resize() {
-    // rect = Rect.fromLTWH(
-    //   game.tileSize,
-    //   (game.screenSize.height * 0.80) - (game.tileSize * 1.5),
-    //   game.tileSize * 4,
-    //   game.tileSize * 2,
-    // );
-
     rect = Rect.fromCenter(
         center: new Offset(game.screenSize.width / 2,
             game.screenSize.height / 2 + game.tileSize * 3),
-      width: game.tileSize * 4,
-      height: game.tileSize * 2);
+      width: game.tileSize * 3,
+      height: game.tileSize * 1.5);
   }
 
   void onTapDown() {

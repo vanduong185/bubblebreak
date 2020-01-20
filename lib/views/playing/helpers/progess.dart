@@ -26,12 +26,12 @@ class Progress {
     else fontSize = 60;
 
     textConfig = TextConfig(
-        fontSize: fontSize, fontFamily: 'Fredoka', color: Color(0xFFFFFFFF), textAlign: TextAlign.justify);
+        fontSize: 30, fontFamily: 'Fredoka', color: Color(0xFFFFFFFF), textAlign: TextAlign.justify);
     
-    String text = (index + 1).toString() + "/" + Configs.NUMBER_OF_STAGE.toString();
+    String text = (index + 1).toString() + "/" + Configs.numberOfStage.toString();
 
     textConfig.render(
-        canvas, text, flamePosition.Position.fromOffset(new Offset(game.screenSize.width/2, game.tileSize * 1.2)), anchor: Anchor.center);
+        canvas, text, flamePosition.Position.fromOffset(new Offset(game.screenSize.width/2, game.tileSize)), anchor: Anchor.center);
   }
 
   void update(double t) {}

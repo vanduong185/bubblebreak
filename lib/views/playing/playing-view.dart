@@ -110,9 +110,9 @@ class PlayingView {
 
       progress.render(canvas);
 
-      clock.render(canvas);
-
       stageWordType.render(canvas);
+
+      clock.render(canvas);
 
       world.render(canvas);
 
@@ -171,7 +171,7 @@ class PlayingView {
     // next stage
     currentStage++;
 
-    if (currentStage < Configs.NUMBER_OF_STAGE) {
+    if (currentStage < Configs.numberOfStage) {
       world.stage = listStage[currentStage];
 
       stageWordType.setType(listStage[currentStage].stageWordType);
@@ -196,6 +196,8 @@ class PlayingView {
   void onTapUp(TapUpDetails d) {
     if (world.bubbles != null && !isWrong) {
       world.onTapUp(d).then((result) {
+        clock.cancel();
+        
         if (result != null) {
           isCorrect = result["isCorrect"];
           isWrong = !result["isCorrect"];

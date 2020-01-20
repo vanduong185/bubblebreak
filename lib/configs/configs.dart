@@ -1,5 +1,5 @@
 class Configs {
-  static const NUMBER_OF_STAGE = 10;
+  static const numberOfStage = 10;
 
   static String apiURL = "https://bubblesbreak.mana-b.com/api/bubblesBreak/getWordList";
   

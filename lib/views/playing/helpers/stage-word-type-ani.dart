@@ -47,7 +47,7 @@ class StageWordTypeAni {
     rect = Rect.fromCenter(
         center:
             new Offset(game.screenSize.width / 2, game.screenSize.height / 2),
-        width: game.tileSize * 3,
-        height: game.tileSize * 1.5);
+        width: game.tileSize * 2,
+        height: game.tileSize);
   }
 }

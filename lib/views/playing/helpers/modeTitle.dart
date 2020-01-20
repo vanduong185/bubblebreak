@@ -21,9 +21,9 @@ class ModeTitle {
 
   void render(Canvas canvas) {
     rect = Rect.fromCenter(
-      center: new Offset(game.screenSize.width / 2, game.tileSize / 2),
-      width: game.tileSize * 4,
-      height: game.tileSize / 2);
+      center: new Offset(game.screenSize.width / 2, game.tileSize * 0.5),
+      width: game.tileSize * 3,
+      height: game.tileSize / 3);
 
     sprite.renderRect(canvas, rect);
   }

@@ -19,8 +19,8 @@ class GoodJobAni {
       new Rect.fromCenter(
           center: new Offset(this.game.screenSize.width / 2,
               this.game.screenSize.height / 2),
-          width: this.game.screenSize.shortestSide < 600 ? 300 : 600,
-          height: this.game.screenSize.shortestSide < 600 ? 300 : 600));
+          width: 300,
+          height: 300));
   }
 
   void update(double t) {

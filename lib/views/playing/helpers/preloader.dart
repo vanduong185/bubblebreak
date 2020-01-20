@@ -39,8 +39,8 @@ class Preloader {
           this.game.screenSize.width / 2,
           this.game.screenSize.height / 2,
         ),
-        width: this.game.screenSize.shortestSide < 600 ? 300 : 600,
-        height: this.game.screenSize.shortestSide < 600 ? 300 : 600,
+        width: 300,
+        height: 300,
       ),
     );
 
@@ -48,7 +48,7 @@ class Preloader {
       canvas,
       "LOADING",
       flamePosition.Position.fromOffset(
-          new Offset(game.screenSize.width / 2, game.screenSize.height / 2 + game.tileSize * 2)),
+          new Offset(game.screenSize.width / 2, game.screenSize.height / 2)),
       anchor: Anchor.center,
     );
   }

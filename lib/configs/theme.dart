@@ -11,35 +11,35 @@ class ColorPallet {
 class Theme {
   static const List<Shadow> textBubbleShadow = <Shadow>[
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(0, 1.5),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(1.5, 0),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(0, -1.5),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(-1.5, 0),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(1.5, -1.5),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(-1.5, -1.5),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(-1.5, 1.5),
     ),
     Shadow(
-      color: ColorPallet.orange,
+      color: ColorPallet.white,
       offset: Offset(1.5, 1.5),
     ),
   ];

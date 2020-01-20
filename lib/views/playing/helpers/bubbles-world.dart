@@ -59,7 +59,7 @@ class BubblesWorld extends Box2DComponent {
       // double y = random.nextDouble() * viewport.width.toInt();
       // print("x " + x.toString());
       // print("y " + y.toString());
-      bubbles.add(new Bubble(this, 0, 0, fontSize, words[i]));
+      bubbles.add(new Bubble(this, 0, 0, 30, words[i]));
     }
 
     addAll(bubbles);

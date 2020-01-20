@@ -5,6 +5,7 @@ import 'package:flame/animation.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart' as material;
 
 import 'package:bubblesbreak/models/word.dart';
 import 'package:bubblesbreak/utils/utils.dart';
@@ -21,7 +22,7 @@ class Bubble extends BodyComponent {
   bool isBroken;
   Animation breakAnimation;
 
-  TextPainter painter;
+  material.TextPainter painter;
 
   Bubble(Box2DComponent box, this.x, this.y, this.fontsize, this.word)
       : super(box) {
@@ -38,7 +39,7 @@ class Bubble extends BodyComponent {
     painter.text = TextSpan(
       text: word.engWord,
       style: TextStyle(
-        color: ColorPallet.white,
+        color: ColorPallet.orange,
         fontSize: fontsize,
         fontFamily: "Fredoka",
         shadows: Theme.textBubbleShadow,
@@ -112,7 +113,6 @@ class Bubble extends BodyComponent {
   }
 
   void onTap() {
-    print("tapped");
     isBroken = true;
   }
 

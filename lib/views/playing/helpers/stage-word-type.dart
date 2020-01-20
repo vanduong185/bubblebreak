@@ -27,9 +27,9 @@ class StageWordType {
   void render(Canvas canvas) {
     rect = Rect.fromCenter(
         center: new Offset(game.screenSize.width / 2,
-            game.screenSize.height - game.tileSize * 2/3),
-        width: game.tileSize * 2,
-        height: game.tileSize);
+            game.screenSize.height - game.tileSize * 0.5),
+        width: game.tileSize * 1.5,
+        height: game.tileSize * 0.8);
 
     sprite.renderRect(canvas, rect);
   }

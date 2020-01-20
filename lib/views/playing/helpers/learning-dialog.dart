@@ -25,8 +25,6 @@ class LearningDialog {
   Rect overlayRect;
 
   Rect nextBtnRect;
-  double nextBtnRectMaxWidth;
-  double nextBtnRectMaxHeight;
 
   Animation nextButtonAni;
 
@@ -46,11 +44,8 @@ class LearningDialog {
     nextButtonAni = Animation.sequenced("playing/nextButton.png", 3,
         textureHeight: 104, textureWidth: 500, stepTime: 0.1);
 
-    dialogRectMaxWidth = game.tileSize * 5;
-    dialogRectMaxHeight = game.tileSize * 8;
-
-    nextBtnRectMaxWidth = game.tileSize * 4;
-    nextBtnRectMaxHeight = game.tileSize;
+    dialogRectMaxWidth = game.tileSize * 4;
+    dialogRectMaxHeight = game.tileSize * 6;
   }
 
   reset() {
@@ -76,7 +71,7 @@ class LearningDialog {
     );
 
     if (sentence.text == null) return;
-    sentence.layout(maxWidth: game.tileSize * 4);
+    sentence.layout(maxWidth: game.tileSize * 3);
   }
 
   void render(Canvas canvas) {
@@ -100,9 +95,9 @@ class LearningDialog {
         dialogRectHeight == dialogRectMaxHeight) {
       nextBtnRect = Rect.fromCenter(
           center: new Offset(game.screenSize.width / 2,
-              game.screenSize.height / 2 + game.tileSize * 3),
-          width: nextBtnRectMaxWidth,
-          height: nextBtnRectMaxHeight);
+              game.screenSize.height / 2 + game.tileSize * 2),
+          width: game.tileSize * 3,
+          height: game.tileSize * 0.8);
 
       nextButtonAni
           .getSprite()
@@ -119,7 +114,7 @@ class LearningDialog {
           word.engWord,
           flamePosition.Position.fromOffset(new Offset(
               game.screenSize.width / 2,
-              game.screenSize.height / 2 - game.tileSize * 2.5)),
+              game.screenSize.height / 2 - game.tileSize * 2)),
           anchor: Anchor.center);
 
       japMeaning = TextConfig(
@@ -132,9 +127,9 @@ class LearningDialog {
           canvas,
           word.japanWord,
           flamePosition.Position.fromOffset(new Offset(
-              game.screenSize.width / 2 + game.tileSize,
-              game.screenSize.height / 2 - game.tileSize * 1.8)),
-          anchor: Anchor.center);
+              game.screenSize.width / 2 + 20,
+              game.screenSize.height / 2 - game.tileSize * 1.5)),
+          anchor: Anchor.topLeft);
 
       wordType = TextConfig(
           fontSize: 20,
@@ -146,15 +141,15 @@ class LearningDialog {
           canvas,
           Configs.getWordTypeJp(word.wordType),
           flamePosition.Position.fromOffset(new Offset(
-              game.screenSize.width / 2 + game.tileSize,
-              game.screenSize.height / 2 - game.tileSize * 1.1)),
-          anchor: Anchor.center);
+              game.screenSize.width / 2 + 20,
+              game.screenSize.height / 2 - game.tileSize)),
+          anchor: Anchor.topLeft);
 
       sentence.paint(
         canvas,
         Offset(
           game.screenSize.width / 2 - sentence.width / 2,
-          game.screenSize.height / 2 - game.tileSize * 0.2,
+          game.screenSize.height / 2 - game.tileSize * 0.1,
         ),
       );
     }
@@ -168,7 +163,7 @@ class LearningDialog {
       dialogRectWidth += dialogRectWidth * t * 20;
       dialogRectHeight += dialogRectHeight * t * 20;
 
-      if (dialogRectWidth > dialogRectMaxWidth &&
+      if (dialogRectWidth > dialogRectMaxWidth ||
           dialogRectHeight > dialogRectMaxHeight) {
         dialogRectWidth = dialogRectMaxWidth;
         dialogRectHeight = dialogRectMaxHeight;

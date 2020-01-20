@@ -75,7 +75,7 @@ class Clock {
     // indicatorSprite. (canvas, indicatorRect);
 
     textConfig = TextConfig(
-        fontSize: 35,
+        fontSize: 40,
         fontFamily: 'Fredoka',
         color: ColorPallet.orange,
         textAlign: TextAlign.justify);

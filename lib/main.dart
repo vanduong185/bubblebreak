@@ -27,6 +27,4 @@ void main() async {
   tapper.onTapDown = game.onTapDown;
   tapper.onTapCancel = game.onTapCancel;
   flameUtil.addGestureRecognizer(tapper);
-
-  SystemChrome.setEnabledSystemUIOverlays([]);
 }
