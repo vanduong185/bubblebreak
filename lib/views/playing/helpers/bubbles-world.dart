@@ -45,20 +45,9 @@ class BubblesWorld extends Box2DComponent {
 
   generateBubbles() {
     bubbles = [];
-
     words = stage.wordList;
-    double fontSize;
-
-    if (game.screenSize.shortestSide < 600 )
-      fontSize = 30.0;
-    else fontSize = 60.0;
 
     for (int i = 0; i < words.length; i++) {
-      // Random random = new Random();
-      // double x = random.nextDouble() * viewport.width.toInt();
-      // double y = random.nextDouble() * viewport.width.toInt();
-      // print("x " + x.toString());
-      // print("y " + y.toString());
       bubbles.add(new Bubble(this, 0, 0, 30, words[i]));
     }
 
@@ -95,16 +84,16 @@ class BubblesWorld extends Box2DComponent {
         if (bubbles[i].bubbleRect != null) {
           if (bubbles[i].bubbleRect.contains(d.globalPosition)) {
             isHandleTap = true;
+
             bubbles[i].onTap();
+            
             tappedBubble = bubbles[i];
             tappedBubbleIndex = i;
+
             Future.delayed(const Duration(milliseconds: 1000), () {
               isHandleTap = false;
             });
-            // remove(bubbles[i]);
-            // bubbles.removeAt(index);
 
-            //isHandleTap = false;
             break;
           }
         }

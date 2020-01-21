@@ -11,6 +11,8 @@ class Clock {
   final BubbleGame game;
   final int duration = 10;
 
+  bool timeUp;
+
   Timer timer;
   int tick = 0;
 
@@ -29,10 +31,15 @@ class Clock {
   }
 
   start() {
+    game.playingView.isTimeUp = false;
+
     timer = Timer.periodic(new Duration(seconds: 1), (timer) {
       tick = timer.tick;
 
-      if (tick >= duration) cancel();
+      if (tick >= duration)  {
+        game.playingView.isTimeUp = true;
+        cancel();
+      }
     });
   }
 

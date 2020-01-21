@@ -7,6 +7,7 @@ import 'package:bubblesbreak/views/playing/helpers/preloader.dart';
 import 'package:bubblesbreak/views/playing/helpers/progess.dart';
 import 'package:bubblesbreak/views/playing/helpers/stage-word-type-ani.dart';
 import 'package:bubblesbreak/views/playing/helpers/stage-word-type.dart';
+import 'package:bubblesbreak/views/playing/helpers/time_up_dialog.dart';
 import 'package:bubblesbreak/views/view.dart';
 import 'package:flutter/gestures.dart';
 
@@ -39,6 +40,8 @@ class PlayingView {
 
   LearningDialog learningDialog;
 
+  TimeUpDialog timeUpDialog;
+
   ResultDialog resultDialog;
 
   Preloader preloader;
@@ -48,6 +51,7 @@ class PlayingView {
 
   bool isCorrect;
   bool isWrong;
+  bool isTimeUp;
 
   bool isLoading;
 
@@ -65,6 +69,7 @@ class PlayingView {
     isCorrect = false;
     isWrong = false;
     endGame = false;
+    isTimeUp = false;
 
     preloader = Preloader(this.game);
 
@@ -86,13 +91,16 @@ class PlayingView {
     clock = Clock(this.game);
 
     learningDialog = LearningDialog(game);
+
+    timeUpDialog = TimeUpDialog(game);
+
     resultDialog = ResultDialog(game);
     resultDialog.reset();
 
     world.generateBubbles();
 
     goodJobAnimation = new GoodJobAni(this.game);
-    
+
     clock.start();
 
     isLoading = false;
@@ -116,7 +124,9 @@ class PlayingView {
 
       world.render(canvas);
 
-      if (stageWordTypeAni != null) stageWordTypeAni.render(canvas);
+      if (stageWordTypeAni != null) {
+        stageWordTypeAni.render(canvas);
+      }
     }
 
     if (isCorrect) {
@@ -125,6 +135,10 @@ class PlayingView {
 
     if (isWrong) {
       learningDialog.render(canvas);
+    }
+
+    if (isTimeUp) {
+      timeUpDialog.render(canvas);
     }
 
     if (endGame) {
@@ -162,6 +176,10 @@ class PlayingView {
     if (endGame) {
       resultDialog.update(t);
     }
+  
+    if (isTimeUp) {
+      timeUpDialog.update(t);
+    }
   }
 
   void renderNextStage() {
@@ -194,10 +212,10 @@ class PlayingView {
   }
 
   void onTapUp(TapUpDetails d) {
-    if (world.bubbles != null && !isWrong) {
+    if (world.bubbles != null && !isWrong && !endGame && !isTimeUp) {
       world.onTapUp(d).then((result) {
         clock.cancel();
-        
+
         if (result != null) {
           isCorrect = result["isCorrect"];
           isWrong = !result["isCorrect"];
@@ -216,6 +234,13 @@ class PlayingView {
       if (learningDialog.nextBtnRect.contains(d.globalPosition)) {
         renderNextStage();
         isWrong = false;
+      }
+    }
+
+    if (isTimeUp) {
+      if (timeUpDialog.nextBtnRect.contains(d.globalPosition)) {
+        timeUpDialog.reset();
+        renderNextStage();
       }
     }
   }
